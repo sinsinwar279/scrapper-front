@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container">
+  <div class="main-heading">
+    <h1 class="display-1">Scrapping Engine</h1>
+  </div>
+  <div class="btn-container">
+    <div class="button-wrapper">
+      <button class="button" (click)="openModal(inputModal)">Add URL</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+<ng-template #inputModal>
+  <div class="modal-content">
+    <div class="main-div">
+      <div class="close-btn" style="margin: 10px;" (click)="closeModal()">
+        <svg width="10" style="cursor : pointer;" height="10" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.74169 0.258309C7.39728 -0.0861031 6.83888 -0.0861028 6.49446 0.258309L4 2.75277L1.50554 0.258309C1.16112 -0.086103 0.602721 -0.0861031 0.258309 0.258309C-0.0861032 0.602721 -0.0861029 1.16112 0.258309 1.50554L2.75277 4L0.258333 6.49444C-0.0860796 6.83885 -0.0860799 7.39726 0.258332 7.74167C0.602744 8.08608 1.16115 8.08608 1.50556 7.74167L4 5.24723L6.49444 7.74167C6.83885 8.08608 7.39726 8.08608 7.74167 7.74167C8.08608 7.39726 8.08608 6.83885 7.74167 6.49444L5.24723 4L7.74169 1.50554C8.0861 1.16112 8.0861 0.602721 7.74169 0.258309Z" fill="#7F7F7F"></path>
+        </svg>
+      </div>
+      <div class="header" style="margin: 10px;">Enter URL</div>
+  
+      <div class="search_bar" style="margin: 30px; text-align: left;">
+        <div class="row">
+          <div class="col-10">
+            <form [formGroup]="urlForm" (ngSubmit)="submitUrlForm(outputModal)">
+              <input style="border: none" id="urlinput" type="text" placeholder="Enter URL" formControlName="url" />
+             
+            </form>
+
+           
+          </div>
+          <div class="col-2">
+            <button class="search-btn" (click)="submitUrlForm(outputModal)"  type="submit">Scrap Data</button>
+          </div>
+        </div>
+      </div>
+      <small *ngIf="urlForm.get('url')?.touched && urlForm.get('url')?.hasError('required')" class="error-message">URL is required.</small>
+      
+    </div>
+  </div>
+  
+  
+
+</ng-template>
+
+
+
+<ng-template #outputModal>
+  <div class="output-content" >
+    <div class="loader" *ngIf="loader"></div>
+    <div *ngIf="!loader">
+      <div style="padding: 20px;" class="container">
+        <div class="row">
+          <div class="col-6">
+            <i (click)="backModal(inputModal)" style="cursor: pointer; color: #495057" class="fa fa-arrow-left" aria-hidden="true"></i>
+          </div>
+          <div class="close-btn col-6" >
+            <svg (click)="closeModal()" width="10" height="10" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.74169 0.258309C7.39728 -0.0861031 6.83888 -0.0861028 6.49446
+            0.258309L4 2.75277L1.50554 0.258309C1.16112 -0.086103 0.602721
+            -0.0861031 0.258309 0.258309C-0.0861032 0.602721 -0.0861029 1.16112
+            0.258309 1.50554L2.75277 4L0.258333 6.49444C-0.0860796 6.83885
+            -0.0860799 7.39726 0.258332 7.74167C0.602744 8.08608 1.16115 8.08608
+            1.50556 7.74167L4 5.24723L6.49444 7.74167C6.83885 8.08608 7.39726
+            8.08608 7.74167 7.74167C8.08608 7.39726 8.08608 6.83885 7.74167
+            6.49444L5.24723 4L7.74169 1.50554C8.0861 1.16112 8.0861 0.602721
+            7.74169 0.258309Z" fill="#7F7F7F"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="heading_main">Title : {{title}}</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-8 main-image-div">
+            <div style="width: 100%; background-color: #f5f3fc; border-radius: 5px;">
+              <ul style="margin: 20px;" *ngIf="images.length > 0">
+                <li>
+                  <img [src]="images[selectedImageIndex]" alt="Image" style="max-width: 100%">
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-4 mt-4">
+            <ul style="overflow: scroll; max-height: 500px;">
+              <li *ngFor="let image of images; let i = index" style="max-width: 100%; padding: 20px;" class="image-list" [class.selectd-img]="selectedImageIndex == i">
+                <img style="width: 100%; border-radius: 10px; cursor: pointer;" [src]="image" alt="Image" (click)="imageClick(i)" >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <p> Description : {{description}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ng-template>
