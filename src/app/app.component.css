@@ -249,7 +249,8 @@ ul{
   color: white;
   border: none;
   cursor: pointer;
-  /* Add any additional styles for the button here */
+  margin-right: 5px;
+  border-radius: 52px;
 }
 
 .error-message {
