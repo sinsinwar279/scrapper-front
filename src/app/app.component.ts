@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title: string = '';
   description: string = '';
   url : string = '';
-  apiurl : string = 'http://127.0.0.1:5000/scrap';
+  apiurl : string = 'http://3.216.132.240:5000/scrap';
   images: string[] = [];
   loader: boolean = false;
   selectedImageIndex = 0;
