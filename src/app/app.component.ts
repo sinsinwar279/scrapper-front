@@ -83,26 +83,37 @@ export class AppComponent implements OnInit {
 
   }
 
-  setData(res: any) {
-    console.log(res);
-    const data = res;
+  // setData(res: any) {
+  //   console.log(res);
+  //   const data = res;
+  //   this.title = data[0].response.title;
+  //   this.images = data[0].response.images
+  //     ? data[0].response.images.filter((image: string) => {
+  //         const extension = image.toLowerCase();
+  //         return extension.endsWith('.jpg') || extension.endsWith('.png') || extension.endsWith('.jpeg') || extension.endsWith('.webp');
+  //       })
+  //     : [];
+  //   this.description = data[0].response.description;
+  
+  //   if (this.description.length === 0) {
+  //     this.description = this.title;
+  //   }
+  
+  //   this.loader = false;
+  // }
+  
+  setData(res: any){
+    console.log(res)
+    const data = res
     this.title = data[0].response.title;
-    this.images = data[0].response.images
-      ? data[0].response.images.filter((image: string) => {
-          const extension = image.toLowerCase();
-          return extension.endsWith('.jpg') || extension.endsWith('.png') || extension.endsWith('.jpeg') || extension.endsWith('.webp');
-        })
-      : [];
+    this.images = data[0].response.images ? data[0].response.images : [];
     this.description = data[0].response.description;
-  
-    if (this.description.length === 0) {
-      this.description = this.title;
+    if(this.description.length == 0){
+      this.description =  this.title
     }
-  
+
     this.loader = false;
   }
-  
-  
   
 
   imageClick(index: number){
