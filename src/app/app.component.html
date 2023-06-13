@@ -54,7 +54,7 @@
   <div class="output-content" >
     <div class="loader" *ngIf="loader"></div>
     <div *ngIf="!loader">
-      <div style="padding: 20px;" class="container">
+      <div  class="container">
         <div class="row">
           <div class="col-6">
             <i (click)="backModal(inputModal)" style="cursor: pointer; color: #495057" class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <h2 class="heading_main">Title : {{title}}</h2>
+      <h2 class="heading_main"> {{title}}</h2>
       <div class="container">
         <div class="row">
           <div class="col-8 main-image-div">
@@ -88,9 +88,10 @@
 
           <div class="col-4 mt-4">
             <ul style="overflow: scroll; max-height: 500px;">
-              <li *ngFor="let image of images; let i = index" style="max-width: 100%; padding: 20px;" class="image-list" [class.selectd-img]="selectedImageIndex == i">
-                <img style="width: 100%; border-radius: 10px; cursor: pointer;" [src]="image" alt="Image" (click)="imageClick(i)" >
+              <li *ngFor="let image of images; let i = index" style="display: flex;align-content: center;" class="image-list" [class.selected-img]="selectedImageIndex == i">
+                <img style="width: 100%; height: 300px; border-radius: 10px; cursor: pointer;" [src]="image" alt="Image" (click)="imageClick(i)">
               </li>
+              
             </ul>
           </div>
         </div>
